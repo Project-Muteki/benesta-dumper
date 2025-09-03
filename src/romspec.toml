@@ -1,0 +1,34 @@
+[rom]
+title = "Applet Template"
+short-title = "Template"
+category = "APPLET_TOOL"
+default-locale = "en"
+copyright = """\
+Copyright (c) YYYY-ZZZZ Your Name
+SPDX-License-Identifier: Unlicense\
+"""
+version = "0.0.1"
+
+[metadata.en]
+title = "Applet Template"
+short-title = "Template"
+
+[metadata.zh_CN]
+title = "应用程序模板"
+short-title = "模板"
+
+[metadata.zh_TW]
+title = "應用程式範本"
+short-title = "範本"
+
+[metadata.ja]
+title = "アプレットテンプレート"
+short-title = "ﾃﾝﾌﾟﾚｰﾄ"
+
+[metadata.ko]
+title = "애플릿 템플릿"
+short-title = "템플릿"
+
+[metadata.th]
+title = "เทมเพลตแอพเพล็ต"
+short-title = "เทมเพลต"
