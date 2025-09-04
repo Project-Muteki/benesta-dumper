@@ -1,34 +1,14 @@
 [rom]
-title = "Applet Template"
-short-title = "Template"
+title = "Benesta Dumper"
+short-title = "Dumper"
 category = "APPLET_TOOL"
 default-locale = "en"
 copyright = """\
-Copyright (c) YYYY-ZZZZ Your Name
-SPDX-License-Identifier: Unlicense\
+Copyright (c) 2025 dogtopus
+SPDX-License-Identifier: MIT\
 """
-version = "0.0.1"
+version = "1.0.0"
 
 [metadata.en]
-title = "Applet Template"
-short-title = "Template"
-
-[metadata.zh_CN]
-title = "应用程序模板"
-short-title = "模板"
-
-[metadata.zh_TW]
-title = "應用程式範本"
-short-title = "範本"
-
-[metadata.ja]
-title = "アプレットテンプレート"
-short-title = "ﾃﾝﾌﾟﾚｰﾄ"
-
-[metadata.ko]
-title = "애플릿 템플릿"
-short-title = "템플릿"
-
-[metadata.th]
-title = "เทมเพลตแอพเพล็ต"
-short-title = "เทมเพลต"
+title = "Benesta Dumper"
+short-title = "Dumper"
