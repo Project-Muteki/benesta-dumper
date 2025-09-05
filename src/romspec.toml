@@ -7,7 +7,7 @@ copyright = """\
 Copyright (c) 2025 dogtopus
 SPDX-License-Identifier: MIT\
 """
-version = "1.0.0"
+version = "1.0.1"
 
 [metadata.en]
 title = "Benesta Dumper"

@@ -17,6 +17,10 @@ extern int sd_read_page(unsigned int device_id, unsigned int start_sector, unsig
 extern void LockSystem(void);
 extern void UnlockSystem(void);
 extern short SetAutoPowerOff(int, short);
+
+extern void OffLED(void);
+extern void OnLED(void);
+
 static unsigned char buf[SECTOR_SIZE * SECTORS_PER_MB];
 
 struct vnl_info_s {
@@ -96,14 +100,15 @@ int main(void) {
 
     mutekix_console_init(NULL);
     atexit(&mutekix_console_fini);
+    OffLED();
 
     LockSystem();
     SetAutoPowerOff(0, 1);
-    mutekix_console_puts("Benesta Dumper v1.0.0");
+    mutekix_console_puts("Benesta Dumper v1.0.1");
 
     total_sectors = get_size_mb() * SECTORS_PER_MB;
     if (total_sectors == 0) {
-        mutekix_console_puts("Cannot detect SD card size. Press HOME button to power off.");
+        mutekix_console_puts("Cannot detect SD card size.\nPress HOME button to power off.");
         goto end;
     }
     for (
@@ -111,9 +116,13 @@ int main(void) {
         next_sector < total_sectors;
         next_sector += SECTORS_PER_MB
     ) {
+        if ((next_sector / SECTORS_PER_MB) % 2 == 0) {
+            OnLED();
+        } else {
+            OffLED();
+        }
         sd_read_page(0, next_sector, buf, SECTORS_PER_MB);
         if (next_sector % (SECTORS_PER_MB * DUMP_LIMIT_MB) == 0) {
-            mutekix_console_puts("");
             if (!open_dump_segment(&current_file, next_sector / (SECTORS_PER_MB * DUMP_LIMIT_MB))) {
                 mutekix_console_puts("Unable to open output file. Press HOME button to power off.");
                 goto end;
@@ -123,12 +132,15 @@ int main(void) {
             goto end;
         }
         fwrite(buf, 1, sizeof(buf), current_file);
-        mutekix_console_printf(".");
     }
     if (current_file != NULL) {
         fclose(current_file);
     }
-    mutekix_console_printf("\nDumped %u sectors. Press HOME button to power off.\n", next_sector);
+    mutekix_console_printf(
+        "Dumped %u sectors (%u MiB).\nPress HOME button to power off.\n",
+        next_sector,
+        next_sector / SECTORS_PER_MB
+    );
 
 end:
     while (true) {

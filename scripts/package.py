@@ -19,12 +19,15 @@ def build_dist_package(exe_file: str, zip_file: str):
     if RE_IS_DOS83.fullmatch(exe_name) is None:
         print('WARNING: Input file does not have a valid DOS 8.3 filename, using fallback name.')
         exe_name = FALLBACK_NAME
-        
+    
+    exe_path_on_card = b'A:\\' + exe_name.encode('ascii')
     with zipfile.ZipFile(zip_file, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as out:
         with out.open('DUMMYFILE', 'w') as f:
-            f.write(b'a')
+            # For Perfect English, etc. that reads dummyfile
+            f.write(exe_path_on_card)
         with out.open('UPDATECFG', 'w') as f:
-            f.write(b'A:\\' + exe_name.encode('ascii'))
+            # For Pocket Challenge DX
+            f.write(exe_path_on_card)
         with out.open(exe_name, 'w') as fout, open(exe_file, 'rb') as fin:
             shutil.copyfileobj(fin, fout)
 

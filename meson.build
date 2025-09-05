@@ -1,5 +1,5 @@
 project('benesta-dumper', 'c',
-  version : '1.0.0',
+  version : '1.0.1',
   default_options : ['warning_level=3'])
 
 elf2bestape = find_program('elf2bestape', required: false)
